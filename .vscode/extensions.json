@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "golang.go",
+    "golang.gotemplate",
+    "esbenp.prettier-vscode",
+    "ms-vscode.makefile-tools",
+    "ms-azuretools.vscode-docker",
+    "github.copilot",
+    "github.copilot-chat",
+    "eamodio.gitlens",
+    "golang.gopls",
+    "ms-vscode-remote.remote-containers"
+  ]
+}
