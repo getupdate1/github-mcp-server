@@ -1,38 +1,156 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Launch stdio server",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "cwd": "${workspaceFolder}",
-            "program": "cmd/github-mcp-server/main.go",
-            "args": ["stdio"],
-            "console": "integratedTerminal",
-        },
-        {
-            "name": "Launch stdio server (read-only)",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "cwd": "${workspaceFolder}",
-            "program": "cmd/github-mcp-server/main.go",
-            "args": ["stdio", "--read-only"],
-            "console": "integratedTerminal",
-        },
-        {
-            "name": "Launch http server",
-            "type": "go",
-            "request": "launch",
-            "mode": "auto",
-            "cwd": "${workspaceFolder}",
-            "program": "cmd/github-mcp-server/main.go",
-            "args": ["http", "--port", "8082"],
-            "console": "integratedTerminal",
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "MCP Server (stdio)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/github-mcp-server",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "args": ["--toolsets", "default"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "go: build"
+    },
+    {
+      "name": "MCP Server (all toolsets)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/github-mcp-server",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "args": ["--toolsets", "all"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "go: build"
+    },
+    {
+      "name": "MCP Server (read-only mode)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/github-mcp-server",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "args": ["--read-only", "--toolsets", "all"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "go: build"
+    },
+    {
+      "name": "mcpcurl CLI",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/mcpcurl",
+      "args": [
+        "--stdio-server-cmd",
+        "go run ./cmd/github-mcp-server",
+        "tools",
+        "get_me"
+      ],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "E2E Tests (debug mode)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/e2e",
+      "env": {
+        "GITHUB_MCP_SERVER_E2E_TOKEN": "${env:GITHUB_MCP_SERVER_E2E_TOKEN}",
+        "GITHUB_MCP_SERVER_E2E_DEBUG": "true"
+      },
+      "args": ["-test.v"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "packagePath": "./e2e"
+    },
+    {
+      "name": "Unit Tests (current file)",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${fileDirname}",
+      "env": {},
+      "args": ["-test.v"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Debug with Insiders",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/github-mcp-server",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "GITHUB_INSIDERS": "true"
+      },
+      "args": ["--toolsets", "all"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "go: build"
+    },
+    {
+      "name": "Debug with Custom Toolsets",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/cmd/github-mcp-server",
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}",
+        "GITHUB_TOOLSETS": "repos,issues,pull_requests"
+      },
+      "args": [],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "go: build"
+    },
+    {
+      "name": "Launch stdio server (legacy)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "cwd": "${workspaceFolder}",
+      "program": "cmd/github-mcp-server/main.go",
+      "args": ["stdio"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Launch stdio server read-only (legacy)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "cwd": "${workspaceFolder}",
+      "program": "cmd/github-mcp-server/main.go",
+      "args": ["stdio", "--read-only"],
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Launch http server (legacy)",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "cwd": "${workspaceFolder}",
+      "program": "cmd/github-mcp-server/main.go",
+      "args": ["http", "--port", "8082"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "MCP Server + mcpcurl",
+      "configurations": ["MCP Server (stdio)", "mcpcurl CLI"],
+      "stopOnEntry": false,
+      "preLaunchTask": "go: build"
+    }
+  ]
 }
