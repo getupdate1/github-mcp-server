@@ -1,0 +1,45 @@
+{
+  "[go]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit",
+      "source.fixAll.golangci-lint": "explicit"
+    },
+    "editor.defaultFormatter": "golang.go"
+  },
+  "go.lintOnSave": "package",
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast"],
+  "go.useLanguageServer": true,
+  "go.languageServerFlags": ["-rpc.trace"],
+  "go.delveConfig": {
+    "dlvToolPath": "dlv",
+    "apiVersion": 2,
+    "showLog": false
+  },
+  "go.testEnvVars": {
+    "GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_PERSONAL_ACCESS_TOKEN}"
+  },
+  "go.testFlags": ["-v", "-race"],
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "editor.rulers": [80, 120],
+  "files.exclude": {
+    "**/.git": true,
+    "**/node_modules": true,
+    "bin/": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "bin/": true,
+    ".git": true
+  },
+  "go.gotoSymbolInWorkspaceSymbolCache": true,
+  "debug.console.wordWrap": true,
+  "debug.showDebugOutput": true
+}
